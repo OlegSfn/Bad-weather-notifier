@@ -11,9 +11,9 @@ import smtplib
 import os
 
 pb = Pushbullet(os.getenv('PushBullet'))
-Sender = os.getenv('EmailSender')
+sender = os.getenv('EmailSender')
 password = os.getenv('Password')
-Receiver = os.getenv('MainEmail')
+receiver = os.getenv('MainEmail')
 
 def SendEmailAndNotification(msg, weather, time):
     # Send notification
@@ -25,8 +25,8 @@ def SendEmailAndNotification(msg, weather, time):
     msg['Subject'] = Header('WeatherNotification', 'utf-8')
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(Sender, password)
-        smtp.sendmail(Sender, Receiver, msg.as_string())
+        smtp.login(sender, password)
+        smtp.sendmail(sender, receiver, msg.as_string())
 
 
 
@@ -55,7 +55,7 @@ def collectInfo(link='https://weather.com/ru-RU/weather/hourbyhour/l/0bcfa52f378
             return
 
 
-schedule.every(0.1).minutes.do(collectInfo)
+schedule.every(30).minutes.do(collectInfo)
 while True:
     schedule.run_pending()
     time.sleep(1)
