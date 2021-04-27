@@ -1,5 +1,4 @@
 # Bad-weather-notifier
-# Bad-weather-notifier
 ----------------------
 sender = An email from what you want to send emails about weather.
 
